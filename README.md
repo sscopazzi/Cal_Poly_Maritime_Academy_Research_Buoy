@@ -1,4 +1,24 @@
 # csum_buoy
-CR1000X datalogger code for Cal Maritime's oceanography research buoy
+CR1000X datalogger code for Cal Maritime's oceanography research buoy. 
 
-All the files in this Git repository are from the buoy SharePoint folder, which is now treated as defunct. All future updates to the code, and other files, should and will be done through Git. 
+# csum_buoy_long_readme
+Using code for the IMU and anamometer supplied by Dr. Cifuentes-Lorenzen, I added and changed what was required for the buoy's current suite of sensors. 
+
+This GitHub contains ONLY the code for the buoy. All other files related to the buoy are in the SharePoint under the owndership of Dr. Parker. 
+
+# SENSORS ON THE BUOY, in order of the program
+YSI_EXO2_Sonde
+https://www.ysi.com/exo2
+
+MetSENS300_Campbell_Scientific
+https://www.campbellsci.com/metsens300
+
+LI_192_Underwater_Quantum_Sensor
+https://www.licor.com/env/products/light/quantum_underwater.html
+
+MicroStrain 3DM-GX5-GNSS/AHRS 
+*not using the GPS capability
+https://www.microstrain.com/inertial-sensors/3dm-gx5-35
+
+Gill Instruments R3-50 3-axis anemometer
+https://dynamax.com/products/sonic-anemometers-and-weather/r3-3-axis-anemometer-range/r3-50-research-anemometer
