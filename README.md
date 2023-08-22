@@ -1,7 +1,4 @@
 # csum_buoy
-CR1000X datalogger code for Cal Maritime's oceanography research buoy. 
-
-# csum_buoy_long_readme
 Using code for the IMU and anamometer supplied by Dr. Cifuentes-Lorenzen, I added and changed what was required for the buoy's current suite of sensors. 
 
 This GitHub contains ONLY the code for the buoy. All other files related to the buoy are in the SharePoint under the owndership of Dr. Parker. 
