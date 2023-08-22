@@ -1,0 +1,124 @@
+Public EXO(24) As String * 1000,,NBytesReturned '24 variables measured by EXO2 sonde
+'the added as string whatnot is from the example code under serialinrecord
+Public InString As String * 100,  
+        'Public NBytes As Long 
+        'Dim iNWSRead As Long
+        'Alias Const EXO_BUFFER=50
+        'Dim ExoBuffer As String * EXO_BUFFER 
+        'Public Vertical_Position
+        'Public Sp_Cond
+        'Public Wiper_Position
+        'Public volt
+        'Public Cable_Power
+
+Alias EXO(1)=Chlorophyll
+Alias EXO(2)=nLFCond
+Alias EXO(3)=Pressure
+Alias EXO(4)=Turbidity
+Alias EXO(5)=Temp
+Alias EXO(6)=Cond
+Alias EXO(7)=D_OX
+Alias EXO(8)=Sal
+Alias EXO(9)=TSS
+Alias EXO(10)=VerticalPosition
+Alias EXO(11)=Depth
+Alias EXO(12)=D_OX2
+Alias EXO(13)=SpCond
+Alias EXO(14)=WiperPosition
+Alias EXO(15)=BPower
+Alias EXO(16)=fDOM
+Alias EXO(17)=D_OX3
+Alias EXO(18)=Phycoerythrin
+Alias EXO(19)=pH
+Alias EXO(20)=CablePower
+Alias EXO(21)=fDOM2
+Alias EXO(22)=ORP
+Alias EXO(23)=TDS
+Alias EXO(24)=pH2
+
+Units Chlorophyll=RFU
+Units nLFCond=microSimens/cm
+Units Pressure=psia
+Units Turbidity=FNU
+Units Temp=C
+Units Cond=microSimens/cm
+Units D_OX=%Sat
+Units Sal=PSU
+Units TSS=mg/L
+'Units Vertical_Position=m
+Units Depth=m
+Units D_OX2=%Local
+'Units Sp_Cond=microSimens/cm
+'Units Wiper_Position=volt
+Units BPower=volt
+Units fDOM=QSU
+Units D_OX3=mg/L
+Units Phycoerythrin=RFU
+Units pH=pH
+'Units Cable_Power=volt
+Units fDOM2=RFU
+Units ORP=mV
+Units TDS=mg/L
+Units pH2=mV
+'Units Cond_Temp=microSimens/cm
+'Units fDOM=QSU,ppb
+'Units D_OX=mg/L
+'Units Turb=NTU
+
+DataTable (EXO,1,-1)
+DataInterval (0,5,Sec,1)
+  Average (1,EXO(1),String,0)
+  Average (1,EXO(2),String,0)
+  Average (1,EXO(3),String,0)
+  Average (1,EXO(4),String,0)
+  Average (1,EXO(5),Double,0)
+  Average (1,EXO(6),Double,0)
+  Average (1,EXO(7),Double,0)
+  Average (1,EXO(8),Double,0)
+  Average (1,EXO(9),Double,0)
+  
+  Average (1,EXO(10),Float,0)
+  Average (1,EXO(11),Float,0)
+  Average (1,EXO(12),Float,0)
+  Average (1,EXO(13),Float,0)
+  Average (1,EXO(14),Float,0)
+  Average (1,EXO(15),Float,0)
+  Average (1,EXO(16),Float,0)
+  Average (1,EXO(17),Float,0)
+  Average (1,EXO(18),Float,0)
+  Average (1,EXO(19),Float,0)
+  Average (1,EXO(20),Float,0)
+  Average (1,EXO(21),Float,0)
+  Average (1,EXO(22),Float,0)
+  Average (1,EXO(23),Float,0)
+  Average (1,EXO(24),Float,0)
+  'Average (1,EXO(3),Float,0)
+  'Average (1,EXO(4),Float,0)
+  'Average (1,EXO(5),Float,0)
+  'Average (1,EXO(6),Float,0)
+EndTable
+
+'Main Program (**no CommsMode [] acl 062221)
+BeginProg
+	SerialOpen(32,9600,0,0,80)
+	    'format 0, not 16 as 16 is for use with the C terminals ONLY
+	    '0 is the format code for RS-232 with no parity, 1 stop bit, 8 data bits 
+	    
+	Scan(5,sec,0,0) 
+	  'SerialOpen (COMRS232,9600,0,0,300)'{commented out DT)
+	  
+		'SDI12Recorder(EXO(),33,0,"C!",1,0)
+		'SerialInRecord(32,EXO(6),0,0,0,0,00)
+    'SDI12Recorder(EXO(),C5,0,"C!",0,0,0,0)	
+SerialInRecord(32,InString,0,79,,&H0D0A,NBytesReturned,01)
+SplitStr(EXO(24),InString," ",24,8)
+
+    'option 8 means delimiters are any character but 0 1 2 3 4 5 6 7 8 9 0 A B C D E F). The hexadecimal value is stored in the array. With this option, FilterString is ignored.
+    
+
+       '&H0D0A is the hexadecimal representation for carriage return/line feed
+        'option 01 Most recent record in serial buffer, store NAN if no record
+		    CallTable EXO
+        'CallTable DebugTable
+	NextScan
+EndProg

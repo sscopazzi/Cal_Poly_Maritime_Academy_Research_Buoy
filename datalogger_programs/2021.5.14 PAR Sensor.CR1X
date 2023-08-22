@@ -1,0 +1,49 @@
+'CR1000X Series
+'Created by Short Cut (4.4)
+
+'Declare Variables and Units
+'Public BattV
+'Public PTemp_C
+Public PAR_Den
+Public PAR_Tot
+'Public PAR_TotW
+
+'Units BattV=Volts
+'Units PTemp_C=Deg C
+Units PAR_Den=umol/s/m^2
+Units PAR_Tot=umol/m^2
+'Units PAR_Tot=umol/m^2 does thos go to Watts?
+'Units PAR_TotW=W/m^2
+
+'Define Data Tables
+DataTable(PAR,True,-1)
+	DataInterval(0,1440,Min,10)
+	'Minimum(1,BattV,FP2,False,False)
+	Sample(1,PAR_Den,FP2)'PAR Flux Density umol
+	Sample(1,PAR_Tot,FP2) 'PAR Total umols
+	'Sample(1,PAR_TotW,FP2) 'PAR Total watts
+EndTable
+
+'Main Program
+BeginProg
+	'Main Scan
+	Scan(5,Sec,1,0)
+		'Default CR1000X Datalogger Battery Voltage measurement 'BattV'
+		'Battery(BattV)
+		'Default CR1000X Datalogger Wiring Panel Temperature measurement 'PTemp_C'
+		'PanelTemp(PTemp_C,60)
+		'LI190R Quantum Sensor measurements 'PAR_Tot' and 'PAR_Den
+		VoltDiff(PAR_Den,1,AutorangeC,1,True,0,60,1,0) '-0.1431
+		If PAR_Den<0 Then PAR_Den=0
+		'Calculate total flux
+		'The multiplier to calculate total flux was calculated by Short Cut
+		'and based on a program execution rate (scan rate) of 5 Seconds.
+		'If you change the program execution rate outside of Short Cut with the CRBasic Editor
+		'you will need to recalculate this multiplier. See the sensor manual for more details.
+		PAR_Tot=PAR_Den*8.278146
+		'Calculate flux density
+		PAR_Den=PAR_Den*1655.629
+		'Call Data Tables and Store Data
+		CallTable PAR
+	NextScan
+EndProg

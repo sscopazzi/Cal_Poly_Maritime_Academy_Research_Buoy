@@ -1,0 +1,38 @@
+Public EXO(24)
+
+Alias EXO(1)=Chlorophyll          : Units Chlorophyll=RFU
+Alias EXO(2)=nLFCond              : Units nLFCond=microSimens/cm
+Alias EXO(3)=Pressure             : Units Pressure=psia
+Alias EXO(4)=Turbidity            : Units Turbidity=FNU
+Alias EXO(5)=Temp                 : Units Temp=C
+Alias EXO(6)=Cond                 : Units Cond=microSimens/cm
+Alias EXO(7)=D_OX                 : Units D_OX=%Sat
+Alias EXO(8)=Sal                  : Units Sal=PSU
+Alias EXO(9)=TSS                  : Units TSS=mg/L
+Alias EXO(10)=VerticalPosition    : Units VerticalPosition=m
+Alias EXO(11)=Depth               : Units Depth=m
+Alias EXO(12)=D_OX2               : Units D_OX2=%Local
+Alias EXO(13)=SpCond              : Units SpCond=microSimens/cm
+Alias EXO(14)=WiperPosition       : Units WiperPosition=volt
+Alias EXO(15)=BPower              : Units BPower=volt
+Alias EXO(16)=fDOM                : Units fDOM=QSU
+Alias EXO(17)=D_OX3               : Units D_OX3=mg/L
+Alias EXO(18)=Phycoerythrin       : Units Phycoerythrin=RFU
+Alias EXO(19)=pH                  : Units pH=pH
+Alias EXO(20)=CablePower          : Units CablePower=volt
+Alias EXO(21)=fDOM2               : Units fDOM2=RFU
+Alias EXO(22)=ORP                 : Units ORP=mV
+Alias EXO(23)=TDS                 : Units TDS=mg/L
+Alias EXO(24)=pH2                 : Units pH2=mV
+
+DataTable (EXO_data,1,-1)
+DataInterval (0,1,Min,1)
+  Sample (24,EXO(1),FP2)
+EndTable
+
+BeginProg
+	Scan(1,Min,1,0)
+		SDI12Recorder(EXO(1),C5,"0","C!",1,0,-1,1)
+		CallTable EXO_data
+	NextScan
+EndProg

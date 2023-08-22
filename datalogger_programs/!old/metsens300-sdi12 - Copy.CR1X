@@ -1,0 +1,97 @@
+'CR1000X Series
+'Example program for MetSENS300 SDI12
+
+'Declare Variables and Units
+Public BP 'Barometric pressure
+Public RH 'Relative humidity
+Public AirTemp 'Air temperature
+Public DP  'Dewpoint
+Public MetSENS_Status As Long 'Status code of MetSENS
+Dim MSData(9)
+Dim N(9) As Long
+
+Public BattV
+Public PTemp
+
+Alias N(1)=Good_Sample 'No fault, good samples
+Alias N(2)=Fault_Wind 'Wind fault
+Alias N(3)=Fault_Temperature 'Temperature fault
+Alias N(4)=Fault_Dewpoint 'Dewpoint fault
+Alias N(5)=Fault_Humidity 'Humidity fault
+Alias N(6)=Fault_Pressure 'Pressure sensor warning
+Alias N(7)=Fault_Compass 'Compass fault
+Alias N(8)=Fault_Undefined  'Undefined fault
+Alias N(9)=Fault_Checksum 'Checksum error
+
+Units BP = hPa
+Units RH = %
+Units AirTemp = Deg C
+Units DP = Deg C
+Units MetSENS_Status=unitless
+
+Units BattV= V
+Units PTemp= Deg C
+
+'Define Data Tables
+DataTable (FifteenMin,True,-1 )
+  DataInterval (0,15,Min,10)
+  Sample (1,BP,IEEE4)
+  Sample (1,RH,FP2)
+  Average (1,AirTemp,FP2,AirTemp = NAN)
+  Sample (1,DP,FP2)
+  Sample (1,MetSENS_Status,Long)
+  Totalize (1,Good_Sample,Long,False)
+EndTable
+
+DataTable(Daily,True,-1)
+  DataInterval(0,1440,Min,10)
+  Maximum (1,AirTemp,FP2,AirTemp = NAN,True)
+  Minimum (1,AirTemp,FP2,AirTemp = NAN,True)
+  Sample (1,PTemp,FP2)
+  Minimum(1,BattV,FP2,False,False)
+EndTable
+
+'Main Program
+BeginProg
+  'Main Scan
+  Scan(3,Sec,1,0) 'MetSENS300 needs at least 3 seconds of measurement time
+    'Default CR1000X Datalogger Battery Voltage measurement 'BattV'
+    Battery(BattV)
+    'Default CR1000X Datalogger Wiring Panel Temperature measurement 'PTemp'
+    PanelTemp(PTemp,60)
+
+    'MetSENS300 multiparameter weather sensor
+    SDI12Recorder (MSData(1),C1,0,"MC1!",1.0,0,9)
+    AirTemp=MSData(1)
+    RH=MSData(2)
+    DP=MSData(3)
+    BP=MSData(4)
+    MetSENS_Status=MSData(5)
+
+    ' Set diagnostic variables as needed
+    Move(Good_Sample,9,0,1)
+    Select Case MetSENS_Status
+    Case=0
+      Good_Sample=1
+    Case=1
+      Fault_Wind=1
+    Case=10
+      Fault_Temperature=1
+    Case=20
+      Fault_Dewpoint=1
+    Case=40
+      Fault_Humidity=1
+    Case=80
+      Fault_Pressure=1
+    Case=100
+      Fault_Compass=1
+    Else
+      Fault_Undefined=1
+    EndSelect
+
+    'Call Data Tables and Store Data
+    CallTable FifteenMin
+    CallTable Daily
+  NextScan
+EndProg
+
