@@ -1,0 +1,12 @@
+"TOA5","11167","CR1000X","11167","CR1000X.Std.06.02","CPU:2021.11.9 FINAL v3.cr1x","54307","EXO_data"
+"TIMESTAMP","RECORD","Chlorophyll","nLFCond","Pressure","Turbidity","Temp","Cond","D_OX","Sal","TSS","VerticalPosition","Depth","D_OX2","SpCond","WiperPosition","BPower","fDOM","D_OX3","Phycoerythrin","pH","CablePower","fDOM2","ORP","TDS","pH2"
+"TS","RN","RFU","microSimens/cm","psia","FNU","C","microSimens/cm","%Sat","PSU","mg/L","m","m","%Local","microSimens/cm","volt","volt","QSU","mg/L","RFU","pH","volt","RFU","mV","mg/L","mV"
+"","","Smp","Smp","Smp","Smp","Smp","Smp","Smp","Smp","Smp","Smp","Smp","Smp","Smp","Smp","Smp","Smp","Smp","Smp","Smp","Smp","Smp","Smp","Smp","Smp"
+"2023-05-27 12:02:00",7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"2023-05-27 12:04:00",8,-0.19,484.1,-0.23,0.34,15.58,391.3,88.7,0.23,0,-0.049,-0.165,91.7,477.1,1.2,0,-0.3,8.83,-0.14,8.5,12.73,-0.1,229.7,310.1,-85.6
+"2023-05-27 12:20:00",9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"2023-05-27 12:22:00",10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"2023-05-27 12:24:00",11,"NAN","NAN","NAN","NAN","NAN","NAN","NAN","NAN","NAN","NAN","NAN","NAN","NAN","NAN","NAN","NAN","NAN","NAN","NAN","NAN","NAN","NAN","NAN","NAN"
+"2023-05-27 12:26:00",12,"NAN","NAN","NAN","NAN","NAN","NAN","NAN","NAN","NAN","NAN","NAN","NAN","NAN","NAN","NAN","NAN","NAN","NAN","NAN","NAN","NAN","NAN","NAN","NAN"
+"2023-05-27 12:28:00",13,"NAN","NAN","NAN","NAN","NAN","NAN","NAN","NAN","NAN","NAN","NAN","NAN","NAN","NAN","NAN","NAN","NAN","NAN","NAN","NAN","NAN","NAN","NAN","NAN"
+"2023-05-27 12:32:00",14,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0

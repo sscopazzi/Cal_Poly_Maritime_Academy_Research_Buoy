@@ -1,0 +1,7 @@
+"TOA5","11167","CR1000X","11167","CR1000X.Std.06.02","CPU:2021.11.9 FINAL v3.cr1x","30682","EXO_data"
+"TIMESTAMP","RECORD","Chlorophyll","nLFCond","Pressure","Turbidity","Temp","Cond","D_OX","Sal","TSS","VerticalPosition","Depth","D_OX2","SpCond","WiperPosition","BPower","fDOM","D_OX3","Phycoerythrin","pH","CablePower","fDOM2","ORP","TDS","pH2"
+"TS","RN","RFU","microSimens/cm","psia","FNU","C","microSimens/cm","%Sat","PSU","mg/L","m","m","%Local","microSimens/cm","volt","volt","QSU","mg/L","RFU","pH","volt","RFU","mV","mg/L","mV"
+"","","Smp","Smp","Smp","Smp","Smp","Smp","Smp","Smp","Smp","Smp","Smp","Smp","Smp","Smp","Smp","Smp","Smp","Smp","Smp","Smp","Smp","Smp","Smp","Smp"
+"2023-05-27 12:52:00",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"2023-05-27 12:54:00",1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"2023-05-27 13:58:00",2,-0.19,485.2,-0.35,0.44,15.71,393.4,89,0.23,0,-0.058,-0.247,92,478.3,1.2,0,-0.14,8.82,-0.13,8.47,10.89,-0.05,243.2,310.9,-84.3
