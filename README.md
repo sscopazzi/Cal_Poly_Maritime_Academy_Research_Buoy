@@ -1,5 +1,5 @@
 # csum_buoy
-Using code for the IMU and anamometer supplied by Dr. Cifuentes-Lorenzen, I added and changed what was required for the buoy's current suite of sensors. 
+Using code for the IMU and anamometer supplied, I added and changed what was required for the buoy's current suite of sensors. 
 
 This GitHub contains ONLY the code for the buoy. All other files related to the buoy are in the SharePoint under the owndership of Dr. Parker. 
 
