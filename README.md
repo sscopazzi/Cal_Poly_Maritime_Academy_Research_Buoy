@@ -1,5 +1,5 @@
 # California State University Maritime Academy's Oceanography Research Buoy
-This repository contains the code for the buoy's datalogger (CRBasic) and the python code to processing / analyzing the collected data. This GitHub contains ONLY the code for the buoy. All other files related to the buoy are in the SharePoint under the owndership of Dr. Parker. 
+This repository contains the code for the buoy's datalogger (CRBasic) and the python code for processing / analyzing the collected data. This GitHub contains ONLY the code for the buoy. All other files related to the buoy are in the SharePoint under the owndership of Dr. Parker. 
 
 # Datalogger and Sensors
 Datalogger: Campbell Scienfific CR1000X
