@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt     # plots                                     
 import pandas as pd                 # data processing                               #
 import numpy as np                  # number processing                             #
 #import folium                      # easy maps, also interactive                   #
-#from folium.features import DivIcon # needed for map labels                         #    
+#from folium.features import DivIcon # needed for map labels                        #    
 import glob                         # glob2                                         #
 import re                           # regix package, for following three functions  #
 from matplotlib.gridspec import GridSpec # the cool subplots                        #
@@ -39,6 +39,7 @@ def process_data(raw_data, column_names, date_start, date_end, resample_freq,enc
     """
     Processes the .csv data files. Outputs all as df and resampled as df_resampled.
     """
+    # print(raw_data)
     data_list = []
     for x in raw_data:
         loop = pd.read_csv(x, sep=',', names=column_names, header=header, na_values='NaN',encoding=encoding, parse_dates=[0])
@@ -108,7 +109,7 @@ def fetch_data(start_date, end_date, month_num,month,year):
 start_time  = '2023-05-30'    
 end_time    = '2023-06-03'    
 year        = 2023
-data_path   = '../python_code/data/'
+data_path   = 'C:/Users/Scopazzi/Desktop/csum_buoy/python_code/data/'
 # path is folder where data is located (will make .py ask eventually)
 # path works best as an absolute file path
 # ------------------------------------ #
@@ -119,7 +120,7 @@ data_path   = '../python_code/data/'
 
 # get filenames from .csv files
 datlog_raw, exo_raw, ms3_raw, ws_raw, paraq1_raw, paraq2_raw, paratmo_raw = initial_data_ingestion(data_path)
-
+# print('RAWDATA',datlog_raw)
 
 # Process Datalogger data
 datlog_column_names = ['time', 'record', 'BattV', 'PTemp']
@@ -208,6 +209,7 @@ fig.subplots_adjust(top=0.94)  # ^ top margin
 
 
 save_close_plot(fig,'exo white')
+print('saved exo white')
 
 
 
@@ -249,7 +251,7 @@ fig.subplots_adjust(top=0.94)  # ^ top margin
 
 
 save_close_plot(fig,'exo black')
-
+print('saved exo black')
 
 
 
@@ -358,11 +360,9 @@ fig.suptitle("CSUM Oceanography Buoy: MAGGIE",fontsize=24)
 # ax15 = fig.add_subplot(gs[8,-4:])
 
 # format_axes(fig)
-plt.show()
-
 
 save_close_plot(fig,'buoy white')
-
+print('saved buoy white ')
 
 
 
@@ -491,3 +491,4 @@ fig.suptitle("CSUM Oceanography Buoy: MAGGIE",fontsize=24,color='white')
 # format_axes(fig)
 
 save_close_plot(fig,'buoy black')
+print('saved buoy black')
