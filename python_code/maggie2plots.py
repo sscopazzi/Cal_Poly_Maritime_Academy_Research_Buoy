@@ -4,16 +4,36 @@
 #  | | | | | | (_| | (_| | (_| | |  __// __/| |_) | | (_) | |_\__ \
 #  |_| |_| |_|\__,_|\__, |\__, |_|\___|_____| .__/|_|\___/ \__|___/
 #                   |___/ |___/             |_|                    
-
+#
 # plotting all data from Maggie, California State University Maritime's oceanography research buoy
+# Made by:  Sophie Scopazzi
+# Contact:  sophie.scopazzi@gmail.com
+# GitHub:   https://github.com/sscopazzi/csum_buoy
+#
+# ------------------------------------------------------------------------------------------------------ #
+# ------------------------------------------------------------------------------------------------------ #
+# ------------------------------------------------------------------------------------------------------ #
+########################################
+# -------- CHANGE THESE THINGS ------- #
+start_time  = '2023-05-30'    
+end_time    = '2023-06-03'    
+year        = 2023
+data_path   = 'C:/Users/Scopazzi/Desktop/csum_buoy/python_code/data/'
+# path is folder where data is located (will make .py ask eventually)
+# path works best as an absolute file path
+# ------------------------------------ #
+########################################
+# ------------------------------------------------------------------------------------------------------ #
+# ------------------------------------------------------------------------------------------------------ #
+# ------------------------------------------------------------------------------------------------------ #
 
 # --- IMPORTS --------------------------------------------------------------------- #
 import pandas as pd                                                                 #
 import matplotlib.pyplot as plt     # plots                                         #
 import pandas as pd                 # data processing                               #
 import numpy as np                  # number processing                             #
-import folium                      # easy maps, also interactive                   #
-from folium.features import DivIcon # needed for map labels                        #    
+import folium                      # easy maps, also interactive                    #
+from folium.features import DivIcon # needed for map labels                         #    
 import glob                         # glob2                                         #
 import re                           # regix package, for following three functions  #
 from matplotlib.gridspec import GridSpec # the cool subplots                        #
@@ -110,23 +130,6 @@ def fetch_data(start_date, end_date, month_num,month,year):
     data_hhr = data.resample('30MIN').mean()
     
     return data,data_hhr
-
-# ------------------------------------------------------------------------------------------------------ #
-# ------------------------------------------------------------------------------------------------------ #
-# ------------------------------------------------------------------------------------------------------ #
-########################################
-# -------- CHANGE THESE THINGS ------- #
-start_time  = '2023-05-30'    
-end_time    = '2023-06-03'    
-year        = 2023
-data_path   = 'C:/Users/Scopazzi/Desktop/csum_buoy/python_code/data/'
-# path is folder where data is located (will make .py ask eventually)
-# path works best as an absolute file path
-# ------------------------------------ #
-########################################
-# ------------------------------------------------------------------------------------------------------ #
-# ------------------------------------------------------------------------------------------------------ #
-# ------------------------------------------------------------------------------------------------------ #
 
 # get filenames from .csv files
 datlog_raw, exo_raw, ms3_raw, ws_raw, paraq1_raw, paraq2_raw, paratmo_raw = initial_data_ingestion(data_path)
@@ -228,8 +231,6 @@ print('saved exo black')
 # ------------------------------------------------------------------------------------------------------ #
 # ------------------------------------------------------------------------------------------------------ #
 # ------------------------------------------------------------------------------------------------------ #
-
-from matplotlib.gridspec import GridSpec
 
 # def format_axes(fig):
 #     for i, ax in enumerate(fig.axes):
@@ -467,7 +468,6 @@ ax.legend()
 ax.set_ylabel('Volts')
 ax.set_title('Voltages')
 ax.grid()
-
 save_close_plot(fig,'voltages')
 print('saved voltages')
 
@@ -491,7 +491,7 @@ ax[3].set_ylabel('degC')
 ax[3].set_title('Dew Point')
 
 ax[0].grid(),ax[1].grid(),ax[2].grid(),ax[3].grid()
-
+plt.suptitle('MetSENS300')
 save_close_plot(fig,'met station')
 print('saved met station')
 
@@ -512,6 +512,7 @@ ax[3].plot(ws_2hr.index,ws_2hr.fWSC)
 ax[3].set_title('Direction')
 
 ax[0].grid(),ax[1].grid(),ax[2].grid(),ax[3].grid()
+plt.suptitle('R3-50 Sonic Anemometer')
 
 save_close_plot(fig,'wind')
 print('saved wind')
@@ -525,7 +526,7 @@ plt.plot(met_hhr.index,met_hhr.BP,label='CSUM Buoy')
 plt.ylabel('mbar')
 plt.grid(lw=0.3,axis='y')
 plt.title('Comparison\nCSUM Buoy and Davis Point (DPXC1)')
-plt.legend();
+plt.legend()
 
 save_close_plot(fig,'compare')
 print('saved compare')
@@ -596,4 +597,4 @@ line=folium.PolyLine(
     color='#e02525'
     ).add_to(map)
 
-map
+map.save('C:/Users/Scopazzi/Desktop/csum_buoy/python_code/exports/map.html')
