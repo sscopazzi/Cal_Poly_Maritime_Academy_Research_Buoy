@@ -1,10 +1,19 @@
+#                               _      ____        _       _       
+#   _ __ ___   __ _  __ _  __ _(_) ___|___ \ _ __ | | ___ | |_ ___ 
+#  | '_ ` _ \ / _` |/ _` |/ _` | |/ _ \ __) | '_ \| |/ _ \| __/ __|
+#  | | | | | | (_| | (_| | (_| | |  __// __/| |_) | | (_) | |_\__ \
+#  |_| |_| |_|\__,_|\__, |\__, |_|\___|_____| .__/|_|\___/ \__|___/
+#                   |___/ |___/             |_|                    
+
+# plotting all data from Maggie, California State University Maritime's oceanography research buoy
+
 # --- IMPORTS --------------------------------------------------------------------- #
 import pandas as pd                                                                 #
 import matplotlib.pyplot as plt     # plots                                         #
 import pandas as pd                 # data processing                               #
 import numpy as np                  # number processing                             #
-#import folium                      # easy maps, also interactive                   #
-#from folium.features import DivIcon # needed for map labels                        #    
+import folium                      # easy maps, also interactive                   #
+from folium.features import DivIcon # needed for map labels                        #    
 import glob                         # glob2                                         #
 import re                           # regix package, for following three functions  #
 from matplotlib.gridspec import GridSpec # the cool subplots                        #
@@ -70,7 +79,7 @@ def initial_data_ingestion(data_path):
     return datlog_raw, exo_raw, ms3_raw, ws_raw, paraq1_raw, paraq2_raw, paratmo_raw
 
 def save_close_plot(fig, filename):
-    fig.savefig(filename)
+    fig.savefig('C:/Users/Scopazzi/Desktop/csum_buoy/python_code/exports/'+filename)
     plt.close(fig)
 
 def fetch_data(start_date, end_date, month_num,month,year):
@@ -102,8 +111,9 @@ def fetch_data(start_date, end_date, month_num,month,year):
     
     return data,data_hhr
 
-
-
+# ------------------------------------------------------------------------------------------------------ #
+# ------------------------------------------------------------------------------------------------------ #
+# ------------------------------------------------------------------------------------------------------ #
 ########################################
 # -------- CHANGE THESE THINGS ------- #
 start_time  = '2023-05-30'    
@@ -114,9 +124,9 @@ data_path   = 'C:/Users/Scopazzi/Desktop/csum_buoy/python_code/data/'
 # path works best as an absolute file path
 # ------------------------------------ #
 ########################################
-
-
-
+# ------------------------------------------------------------------------------------------------------ #
+# ------------------------------------------------------------------------------------------------------ #
+# ------------------------------------------------------------------------------------------------------ #
 
 # get filenames from .csv files
 datlog_raw, exo_raw, ms3_raw, ws_raw, paraq1_raw, paraq2_raw, paratmo_raw = initial_data_ingestion(data_path)
@@ -157,31 +167,9 @@ at3 = process_data(paratmo_raw, par_column_names,start_time,end_time, '1H','utf-
 davismay,davismay_hhr = fetch_data(start_time, end_time,5,'May',year)
 davisjune,davisjune_hhr = fetch_data(start_time, end_time,6,'Jun',year)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# ------------------------------------------------------------------------------------------------------ #
+# ------------------------------------------------------------------------------------------------------ #
+# ------------------------------------------------------------------------------------------------------ #
 
 exo_plot_variables = ['Chloro', 'nLFCond', 'Pressure', 'Turbidity', 'Temp', 'Cond', 'D_OX', 'Sal',
              'TSS', 'VerticalPosition', 'Depth', 'D_OX2', 'SpCond', 'WiperPosition',
@@ -211,22 +199,9 @@ fig.subplots_adjust(top=0.94)  # ^ top margin
 save_close_plot(fig,'exo white')
 print('saved exo white')
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# ------------------------------------------------------------------------------------------------------ #
+# ------------------------------------------------------------------------------------------------------ #
+# ------------------------------------------------------------------------------------------------------ #
 
 fig, ax = plt.subplots(ncols=cols, nrows=rows, figsize=(18, 4 * rows), sharex=True)
 
@@ -247,27 +222,12 @@ fig.suptitle("CSUM Oceanography Buoy: MAGGIE\nEXO data",fontsize=24,color='white
 fig.tight_layout()
 fig.subplots_adjust(top=0.94)  # ^ top margin
 
-
-
-
 save_close_plot(fig,'exo black')
 print('saved exo black')
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# ------------------------------------------------------------------------------------------------------ #
+# ------------------------------------------------------------------------------------------------------ #
+# ------------------------------------------------------------------------------------------------------ #
 
 from matplotlib.gridspec import GridSpec
 
@@ -364,22 +324,9 @@ fig.suptitle("CSUM Oceanography Buoy: MAGGIE",fontsize=24)
 save_close_plot(fig,'buoy white')
 print('saved buoy white ')
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# ------------------------------------------------------------------------------------------------------ #
+# ------------------------------------------------------------------------------------------------------ #
+# ------------------------------------------------------------------------------------------------------ #
 
 # def format_axes(fig):
 #     for i, ax in enumerate(fig.axes):
@@ -492,3 +439,161 @@ fig.suptitle("CSUM Oceanography Buoy: MAGGIE",fontsize=24,color='white')
 
 save_close_plot(fig,'buoy black')
 print('saved buoy black')
+
+# ------------------------------------------------------------------------------------------------------ #
+# ------------------------------------------------------------------------------------------------------ #
+# ------------------------------------------------------------------------------------------------------ #
+# datalogger solo plot
+
+fig,ax=plt.subplots(ncols=1,nrows=2,figsize=(8,5),sharex=True)
+ax[0].set_title('Datalogger')
+
+ax[0].plot(datlog_hr.index,datlog_hr.BattV)
+ax[0].set_ylabel('Voltage')
+ax[0].grid()
+
+ax[1].plot(datlog_hr.index,datlog_hr.PTemp)
+ax[1].set_ylabel('degC')
+ax[1].grid()
+
+save_close_plot(fig,'datalogger')
+print('saved datalogger')
+# voltages: datalogger and exo line 
+
+fig,ax=plt.subplots(figsize=(8,5))
+ax.plot(exo_hr.index,exo_hr.CablePower,label='EXO Cable Power',color='black')
+ax.plot(datlog_hr.index,datlog_hr.BattV,label='Datalogger')
+ax.legend()
+ax.set_ylabel('Volts')
+ax.set_title('Voltages')
+ax.grid()
+
+save_close_plot(fig,'voltages')
+print('saved voltages')
+
+# met station
+fig,ax=plt.subplots(ncols=1,nrows=4,figsize=(8,10),sharex=True)
+
+ax[0].plot(met_hr.index,met_hr.BP)
+ax[0].set_ylabel('mbar')
+ax[0].set_title('Pressure')
+
+ax[1].plot(met_hr.index,met_hr.RH)
+ax[1].set_ylabel('%')
+ax[1].set_title('Relative Humidity')
+
+ax[2].plot(met_hr.index,met_hr.AirTemp)
+ax[2].set_ylabel('degC')
+ax[2].set_title('Air Temp')
+
+ax[3].plot(met_hr.index,met_hr.DP)
+ax[3].set_ylabel('degC')
+ax[3].set_title('Dew Point')
+
+ax[0].grid(),ax[1].grid(),ax[2].grid(),ax[3].grid()
+
+save_close_plot(fig,'met station')
+print('saved met station')
+
+# wind
+fig,ax=plt.subplots(ncols=1,nrows=4,figsize=(8,10),sharex=True)
+
+ax[0].plot(ws_hhr.index,ws_hhr.fWSV1)
+#ax[0].set_ylabel('Wind Speed') dunno
+ax[0].set_title('fWSV1')
+
+ax[1].plot(ws_hhr.index,ws_hhr.fWSV2)
+ax[1].set_title('fWSV2')
+
+ax[2].plot(ws_hhr.index,ws_hhr.fWSV3)
+ax[2].set_title('fWSV3')
+
+ax[3].plot(ws_2hr.index,ws_2hr.fWSC)
+ax[3].set_title('Direction')
+
+ax[0].grid(),ax[1].grid(),ax[2].grid(),ax[3].grid()
+
+save_close_plot(fig,'wind')
+print('saved wind')
+
+# compare data from Davis Point with the buoy
+fig = plt.figure(figsize=(9,6))
+
+plt.plot(davisjune_hhr.index,davisjune_hhr.PRES,color='k')
+plt.plot(davismay_hhr.index,davismay_hhr.PRES,color='k',label='Davis Pt')
+plt.plot(met_hhr.index,met_hhr.BP,label='CSUM Buoy')
+plt.ylabel('mbar')
+plt.grid(lw=0.3,axis='y')
+plt.title('Comparison\nCSUM Buoy and Davis Point (DPXC1)')
+plt.legend();
+
+save_close_plot(fig,'compare')
+print('saved compare')
+
+# use folium to show the buoy test location and Davis Point DPXC1
+buoyloc = [38.066, -122.230]    # buoy location 38.06593137898257, -122.2301695546093
+davisloc = [38.056, -122.264]   # Davis DPXC1 38.056 N, 122.264 W
+mapcenter = [38.062, -122.247]  # define center of map
+
+# if making a map users can zoom / pan
+# min_lat, max_lat = 37.5,38.1    # define max lat so people don't get lost
+# min_lon, max_lon = -122,-122.8  # as above for long
+
+f = folium.Figure(width=200, height=200)
+
+map = folium.Map( 
+    location=mapcenter, 
+    max_bounds=True,
+    # min_lat=min_lat, # used in conjuction with above 
+    # max_lat=max_lat,
+    # min_lon=min_lon,
+    # max_lon=max_lon,
+    zoom_start=14.5,
+    control_scale=False,
+    zoom_control=False,
+    scrollWheelZoom=False,
+    dragging=False)
+
+# https://gis.stackexchange.com/questions/290861/python-folium-package-for-satellite-map
+tile = folium.TileLayer(
+        tiles = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+        attr = 'Esri',
+        name = 'Esri Satellite',
+        overlay = False,
+        control = False
+       ).add_to(map)
+
+# marker for buoy
+folium.Marker(buoyloc, popup="CSUM Buoy").add_to(map) # add buoy marker to map
+folium.map.Marker(                                    # add text
+    [38.066, -122.230],
+    icon=DivIcon(
+        icon_size=(150,36),
+        icon_anchor=(50,-20),
+        html='<div style="color:#ffffff;font-size: 12pt">CSUM Buoy</div>',
+        )
+    ).add_to(map)
+
+# marker for davis
+folium.Marker(davisloc, popup="Davis Point DPXC1").add_to(map) # add Davis Pt DPXC1 marker to map
+folium.map.Marker(                                             # add text
+    [38.056, -122.264],
+    icon=DivIcon(
+        icon_size=(150,36),
+        icon_anchor=(25,-10),
+        html='<div style="color:#ffffff;font-size: 12pt">DPXC1</div>',
+        )
+    ).add_to(map)
+
+line_between = [
+    (38.066, -122.230),
+    (38.056, -122.264),
+]
+
+line=folium.PolyLine(
+    locations=line_between,
+    weight=3,
+    color='#e02525'
+    ).add_to(map)
+
+map
