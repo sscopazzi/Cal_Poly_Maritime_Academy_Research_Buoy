@@ -6,6 +6,10 @@
 #                   |___/ |___/             |_|                    
 #
 # plotting all data from Maggie, California State University Maritime's oceanography research buoy
+# this injests all data in the path, then plots data that is in the start and end time
+#
+# THIS IS IN A .PY FOR EVENTUAL USE MAKING GRAPHICS THAT UPDATE ON A TIME BASIS ON A WEBSITE
+#
 # Made by:  Sophie Scopazzi
 # Contact:  sophie.scopazzi@gmail.com
 # GitHub:   https://github.com/sscopazzi/csum_buoy
