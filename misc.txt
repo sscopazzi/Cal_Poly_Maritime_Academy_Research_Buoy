@@ -1,0 +1,18 @@
+buoy diagram
+  - solidworks
+  - photos of test
+flow analysis study
+current study
+sensors onboard
+  - type, why
+Location selection
+Mooring arrangment 
+
+Deployment plan
+Maintanence plan
+
+Preliminary results 
+
+sensor questions
+  - cheaper anamometer and wind vane?
+  - no imu? BNO085?
